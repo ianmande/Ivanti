@@ -5,7 +5,7 @@
 import {useNavigation} from '@react-navigation/native';
 import {PRODUCT_DETAILS} from 'navigations/routesNames';
 import React from 'react';
-import {View, Image, Text, StyleSheet, Pressable} from 'react-native';
+import {View, Image, Text, StyleSheet, Pressable, ViewStyle} from 'react-native';
 import {colors} from 'theme/colors';
 
 import {Product as ProductProps} from 'types/app';
@@ -24,12 +24,16 @@ const styles = StyleSheet.create({
   detailsProduct: {marginLeft: 3},
 });
 
-export const Product = ({title, featuredImage, variants, id}: ProductProps) => {
+interface Props extends ProductProps {
+  style?: ViewStyle;
+}
+
+export const Product = ({title, featuredImage, variants, id, style}: Props) => {
   const navigation = useNavigation();
   const amount = variants?.edges[0]?.node?.price.amount;
 
   return (
-    <View style={styles.root}>
+    <View style={[styles.root, style]}>
       <Pressable onPress={() => navigation.navigate(PRODUCT_DETAILS, {productId: id})}>
         <Image source={{uri: featuredImage.url}} style={styles.image} />
         <View style={styles.detailsProduct}>

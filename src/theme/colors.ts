@@ -15,6 +15,7 @@ export const palette = {
   colorDarkGunmetal: '#21262DE5',
   colorBlack: '#000000',
   colorPaleViolet: '#C9A0F8',
+  colorBrightGray: '#EDEDED',
 } as const;
 
 /**

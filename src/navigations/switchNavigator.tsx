@@ -14,11 +14,14 @@ import {TabNavigator} from './tabBarNavigator';
 export type RootStackParamList = {
   Home: undefined;
   ProductDetails: {productId: string};
+  Collections: {collectionId: string};
+  Search: {searchTerm: string};
 };
 
 export const AppSwitchNavigator = () => (
   <StackRoot.Navigator initialRouteName={WELCOME}>
     <StackRoot.Screen name={WELCOME} component={Welcome} options={{headerShown: false}} />
+
     <StackRoot.Screen name={HOME} component={TabNavigator} options={{headerShown: false}} />
   </StackRoot.Navigator>
 );

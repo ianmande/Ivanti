@@ -1,14 +1,18 @@
 import React from 'react';
-import {FlatList, View} from 'react-native';
+import {FlatList, View, StyleSheet} from 'react-native';
 
 import {useQuery} from '@apollo/client';
 
-import {Product} from './Product';
+import {Product} from '../../../components/Product';
 
 import {CollectionData, CollectionVariables} from 'types/app';
 
 import {GET_PRODUCTS_BY_COLLECTION} from 'api/queries';
 import {ListHead} from './ListHead';
+
+const styles = StyleSheet.create({
+  root: {paddingHorizontal: 16, marginBottom: 40},
+});
 
 export const ProductsByCollection = ({collectionId}: CollectionVariables) => {
   const {data} = useQuery<CollectionData, CollectionVariables>(GET_PRODUCTS_BY_COLLECTION, {
@@ -18,8 +22,8 @@ export const ProductsByCollection = ({collectionId}: CollectionVariables) => {
   const products = data?.collection.products.edges;
 
   return (
-    <View style={{paddingHorizontal: 16, marginBottom: 40}}>
-      <ListHead title={data?.collection.title ?? ''} />
+    <View style={styles.root}>
+      <ListHead title={data?.collection.title ?? ''} collectionId={collectionId} />
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}

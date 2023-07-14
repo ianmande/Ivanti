@@ -9,13 +9,16 @@ import {NavigationContainer} from '@react-navigation/native';
 import {client} from 'api/api';
 
 import {AppSwitchNavigator} from 'navigations/switchNavigator';
+import {CartProvider} from 'context/cartContext';
 
 function App(): JSX.Element {
   return (
     <ApolloProvider client={client}>
-      <NavigationContainer>
-        <AppSwitchNavigator />
-      </NavigationContainer>
+      <CartProvider>
+        <NavigationContainer>
+          <AppSwitchNavigator />
+        </NavigationContainer>
+      </CartProvider>
     </ApolloProvider>
   );
 }

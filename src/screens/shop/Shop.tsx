@@ -1,25 +1,42 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, StatusBar, Text, useColorScheme, View} from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {SafeAreaView, StatusBar, Text, View, FlatList, StyleSheet} from 'react-native';
+
+import {useShop} from 'hooks/useShop';
+
+import ItemCart from './parts/ItemCart';
+import {colors} from 'theme/colors';
+
+import {ShadowUtils} from 'utils/shadow';
+import EmptyCart from './parts/EmptyCart';
+
+const styles = StyleSheet.create({
+  root: {padding: 16},
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    color: colors`colorBlack`,
+    elevation: 10,
+    ...ShadowUtils.get(),
+  },
+  totalText: {
+    fontSize: 22,
+    textAlign: 'right',
+    color: colors`colorBlack`,
+  },
+});
 
 export const Shop = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  const {products, totalPrice} = useShop();
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView contentInsetAdjustmentBehavior="automatic" style={backgroundStyle}>
-        <View>
-          <Text>SHOP</Text>
-        </View>
-      </ScrollView>
+    <SafeAreaView>
+      <StatusBar />
+      <View style={styles.root}>
+        <Text style={styles.title}>My bag</Text>
+        <FlatList data={products} renderItem={({item}) => <ItemCart product={item} />} ListEmptyComponent={EmptyCart} />
+        <Text style={styles.totalText}>Total: ${totalPrice}</Text>
+      </View>
     </SafeAreaView>
   );
 };

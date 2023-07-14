@@ -1,23 +1,3 @@
-export interface Product {
-  id: string;
-  title: string;
-  featuredImage: {
-    id: string;
-    url: string;
-  };
-  variants: {
-    edges: {
-      node: {
-        id: string;
-        price: {
-          amount: number;
-          currencyCode: string;
-        };
-      };
-    }[];
-  };
-}
-
 export interface Collection {
   id: string;
   handle: string;
@@ -28,10 +8,42 @@ export interface Collection {
     url: string;
   };
   products: {
-    edges: {
-      node: Product;
-    }[];
+    edges: ProductEdge[];
+    pageInfo: PageInfo;
   };
+}
+
+export interface Product {
+  images: any;
+  id: string;
+  title: string;
+  featuredImage: {
+    id: string;
+    url: string;
+  };
+  variants: {
+    edges: VariantEdge[];
+  };
+}
+
+export interface ProductEdge {
+  cursor: string;
+  node: Product;
+}
+
+export interface VariantEdge {
+  node: {
+    id: string;
+    price: {
+      amount: number;
+      currencyCode: string;
+    };
+  };
+}
+
+export interface PageInfo {
+  hasNextPage: boolean;
+  endCursor: string;
 }
 
 export interface CollectionData {
@@ -40,6 +52,7 @@ export interface CollectionData {
 
 export interface CollectionVariables {
   collectionId: string;
+  cursor: string | null;
 }
 
 export interface ImageNode {
@@ -51,7 +64,7 @@ export interface ImageNode {
 export interface VariantNode {
   node: {
     price: {
-      amount: number;
+      amount: number | string;
       currencyCode: string;
     };
   };
