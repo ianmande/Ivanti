@@ -35,7 +35,7 @@ export const Shop = () => {
       <View style={styles.root}>
         <Text style={styles.title}>My bag</Text>
         <FlatList data={products} renderItem={({item}) => <ItemCart product={item} />} ListEmptyComponent={EmptyCart} />
-        <Text style={styles.totalText}>Total: ${totalPrice}</Text>
+        {totalPrice > 0 && <Text style={styles.totalText}>Total: ${totalPrice}</Text>}
       </View>
     </SafeAreaView>
   );

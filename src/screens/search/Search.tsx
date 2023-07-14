@@ -44,7 +44,7 @@ export const Search = () => {
         keyExtractor={item => item.node.id}
         ListFooterComponent={loading ? <ActivityIndicator /> : null}
         contentContainerStyle={styles.listContainer}
-        ListEmptyComponent={EmptySearch}
+        ListEmptyComponent={!loading ? <EmptySearch /> : null}
       />
     </SafeAreaView>
   );

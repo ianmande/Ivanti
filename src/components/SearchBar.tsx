@@ -45,7 +45,13 @@ const SearchBar: React.FC = () => {
       </TouchableOpacity>
 
       <Animated.View style={[styles.searchBar, {width: barWidth, paddingHorizontal: isSearchOpen ? 12 : 0}]}>
-        <TextInput style={styles.input} placeholder="Search" autoFocus onSubmitEditing={handleSubmit} />
+        <TextInput
+          style={styles.input}
+          placeholder="Search"
+          autoFocus
+          onSubmitEditing={handleSubmit}
+          placeholderTextColor={colors`colorBlack`}
+        />
       </Animated.View>
     </View>
   );
