@@ -16,6 +16,7 @@ export const palette = {
   colorBlack: '#000000',
   colorPaleViolet: '#C9A0F8',
   colorBrightGray: '#EDEDED',
+  colorSpanishGray: '#9B9B9B',
 } as const;
 
 /**

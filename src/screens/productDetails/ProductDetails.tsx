@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
   },
   price: {
     fontSize: 20,
+    color: colors`colorSpanishGray`,
   },
   description: {
     fontSize: 16,
@@ -75,7 +76,7 @@ export const ProductDetails = () => {
         <View style={styles.productDetails}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{data?.product.title}</Text>
-            <Text style={styles.price}>{productPrice && `$${productPrice}`}</Text>
+            <Text style={styles.price}>${productPrice}</Text>
           </View>
           <Text style={styles.description}>{data?.product.description}</Text>
         </View>

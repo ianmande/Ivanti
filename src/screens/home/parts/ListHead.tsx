@@ -15,6 +15,7 @@ interface ListHeadProps {
 const styles = StyleSheet.create({
   root: {flex: 1, justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', marginBottom: 18},
   title: {fontSize: 24, color: colors`colorBlack`, fontWeight: 'bold'},
+  viewText: {color: colors`colorSpanishGray`},
 });
 
 export const ListHead = ({title, collectionId}: ListHeadProps) => {
@@ -24,7 +25,7 @@ export const ListHead = ({title, collectionId}: ListHeadProps) => {
     <View style={styles.root}>
       <Text style={styles.title}>{title}</Text>
       <TouchableOpacity onPress={() => navigation.navigate(COLLECTIONS, {collectionId})}>
-        <Text>View all</Text>
+        <Text style={styles.viewText}>View all</Text>
       </TouchableOpacity>
     </View>
   );

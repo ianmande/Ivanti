@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
   },
   textPrice: {
     fontSize: 18,
+    color: colors`colorSpanishGray`,
   },
   removeProduct: {
     position: 'absolute',
@@ -50,6 +51,7 @@ const ItemCart = ({product}: Props) => {
   const imageUri = product.images.edges[0].node.url;
   const title = product.title;
   const price = product.variants.edges[0].node.price.amount;
+
   return (
     <View style={styles.root}>
       <Image source={{uri: imageUri}} style={styles.img} />

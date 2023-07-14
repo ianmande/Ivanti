@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   },
   title: {fontSize: 16, color: colors`colorBlack`},
   detailsProduct: {marginLeft: 3},
+  viewText: {color: colors`colorSpanishGray`},
 });
 
 interface Props extends ProductProps {
@@ -38,7 +39,7 @@ export const Product = ({title, featuredImage, variants, id, style}: Props) => {
         <Image source={{uri: featuredImage.url}} style={styles.image} />
         <View style={styles.detailsProduct}>
           <Text style={styles.title}>{title}</Text>
-          <Text>${amount}</Text>
+          <Text style={styles.viewText}>${amount}</Text>
         </View>
       </Pressable>
     </View>
