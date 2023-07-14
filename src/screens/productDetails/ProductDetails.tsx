@@ -17,6 +17,7 @@ import {colors} from 'theme/colors';
 import {GET_PRODUCT} from 'api/queries';
 
 import {ProductData, ProductVariables} from 'types/app';
+import {ImageSkeleton} from './parts/ImageSkeleton';
 
 const styles = StyleSheet.create({
   root: {
@@ -28,7 +29,6 @@ const styles = StyleSheet.create({
     height: 350,
     marginHorizontal: 3,
   },
-
   productDetails: {padding: 16},
   titleContainer: {
     justifyContent: 'space-between',
@@ -68,14 +68,14 @@ export const ProductDetails = () => {
       <View>
         <FlatList
           horizontal
-          data={images}
-          renderItem={({item}) => <Image source={{uri: item.node.url}} style={styles.img} />}
-          keyExtractor={item => item.node.url}
+          data={loading ? new Array(5).fill({}) : images}
+          renderItem={loading ? ImageSkeleton : ({item}) => <Image source={{uri: item.node.url}} style={styles.img} />}
+          keyExtractor={(item, index) => index.toString()}
         />
         <View style={styles.productDetails}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{data?.product.title}</Text>
-            <Text style={styles.price}>${productPrice}</Text>
+            <Text style={styles.price}>{productPrice && `$${productPrice}`}</Text>
           </View>
           <Text style={styles.description}>{data?.product.description}</Text>
         </View>

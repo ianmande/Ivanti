@@ -9,15 +9,18 @@ import {CollectionData, CollectionVariables} from 'types/app';
 
 import {GET_PRODUCTS_BY_COLLECTION} from 'api/queries';
 import {ListHead} from './ListHead';
+import SkeletonProduct from 'components/SkeletonProduct';
 
 const styles = StyleSheet.create({
   root: {paddingHorizontal: 16, marginBottom: 40},
 });
 
 export const ProductsByCollection = ({collectionId}: CollectionVariables) => {
-  const {data} = useQuery<CollectionData, CollectionVariables>(GET_PRODUCTS_BY_COLLECTION, {
-    variables: {collectionId},
+  const {data, loading} = useQuery<CollectionData, CollectionVariables>(GET_PRODUCTS_BY_COLLECTION, {
+    variables: {collectionId, cursor: null},
   });
+
+  const renderSkeleton = () => <SkeletonProduct />;
 
   const products = data?.collection.products.edges;
 
@@ -27,9 +30,9 @@ export const ProductsByCollection = ({collectionId}: CollectionVariables) => {
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
-        data={products}
-        renderItem={({item}) => <Product {...item.node} />}
-        keyExtractor={item => item.node.id}
+        data={loading ? new Array(5).fill({}) : products}
+        renderItem={loading ? renderSkeleton : ({item}) => <Product {...item.node} />}
+        keyExtractor={(item, index) => index.toString()}
       />
     </View>
   );
